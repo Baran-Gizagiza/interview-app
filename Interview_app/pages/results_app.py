@@ -6,8 +6,8 @@ import os
 st.title("📊 アンケート：受講前後比較")
 
 # ID一覧取得
-pre_ids = [f[:-4] for f in os.listdir("/mount/src/interview-app/Interview_app/data/pre") if f.endswith(".csv")]
-post_ids = [f[:-4] for f in os.listdir("/mount/src/interview-app/Interview_app/data/post") if f.endswith(".csv")]
+pre_ids = [f[:-4] for f in os.listdir("data/pre") if f.endswith(".csv")]
+post_ids = [f[:-4] for f in os.listdir("data/post") if f.endswith(".csv")]
 valid_ids = list(set(pre_ids) & set(post_ids))
 
 if not valid_ids:
