@@ -5,9 +5,23 @@ import os
 
 st.title("📊 アンケート：受講前後比較")
 
-# ID一覧取得
-pre_ids = [f[:-4] for f in os.listdir("data/pre") if f.endswith(".csv")]
-post_ids = [f[:-4] for f in os.listdir("data/post") if f.endswith(".csv")]
+# ディレクトリパス
+pre_path = "data/pre"
+post_path = "data/post"
+
+# 存在確認＆初期化（Cloud上で確実に存在しないときでも対応）
+if not os.path.exists(pre_path):
+    st.warning("⚠️ 'data/pre' フォルダが存在しません。まだ誰もアンケートに回答していないか、アップロードに失敗している可能性があります。")
+    pre_ids = []
+else:
+    pre_ids = [f[:-4] for f in os.listdir(pre_path) if f.endswith(".csv")]
+
+if not os.path.exists(post_path):
+    st.warning("⚠️ 'data/post' フォルダが存在しません。まだ誰も受講後アンケートに回答していないか、アップロードに失敗している可能性があります。")
+    post_ids = []
+else:
+    post_ids = [f[:-4] for f in os.listdir(post_path) if f.endswith(".csv")]
+
 valid_ids = list(set(pre_ids) & set(post_ids))
 
 if not valid_ids:
